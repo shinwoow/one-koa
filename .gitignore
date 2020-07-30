@@ -2,6 +2,7 @@
 node_modules/
 public/
 uploads/
+files/
 /dist/
 npm-debug.log*
 yarn-debug.log*

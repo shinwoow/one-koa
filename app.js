@@ -12,6 +12,7 @@ const cors = require('./utils/cors')
 const router = require('./routes/index')
 const music = require('./routes/music')
 const user = require('./routes/user')
+const notes = require('./routes/notes')
 
 const log = require('./log/index')
 
@@ -33,7 +34,7 @@ app.use(logger({
 
 ))
 app.use(require('koa-static')(__dirname + '/public'))
-app.use(require('koa-static')(__dirname + '/uploads'))
+app.use(require('koa-static')(__dirname + '/files'))
 
 
 app.use(views(__dirname + '/views', {
@@ -64,6 +65,7 @@ app.use(async (ctx, next) => {
 app.use(router.routes(), router.allowedMethods())
 app.use(music.routes(), music.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
+app.use(notes.routes(), notes.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
