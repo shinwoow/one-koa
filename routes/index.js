@@ -1,19 +1,28 @@
-const router = require('koa-router')()
+const mysql = require('../mysql')
+const Router = require('koa-router')
 
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
-})
+//实例化路由， 拼接到api路径下，restful规范
+const router = new Router({
+  prefix: '/api'
+});
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
+router.get('/hellow/:name', async (ctx, next) => {
+  var name = ctx.params.name;
+  ctx.response.body = `<h1>Hello, ${name}!</h1>`
+});
 
-router.get('/json', async (ctx, next) => {
+
+//获取用户信息
+router.get('/user', async (ctx, next) => {
+  let data = await mysql.getUser()
+  ctx.add
   ctx.body = {
-    title: 'koa2 json'
+    "code": 1,
+    "data": data,
+    "mesg": 'ok'
   }
+  next()
 })
 
+//导出router
 module.exports = router
