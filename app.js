@@ -26,9 +26,9 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger({
     transporter: (str, args) => {
-      console.log('logger')
-      console.log(str)
-      console.log(args)
+      // console.log('logger')
+      // console.log(str)
+      // console.log(args)
     }
   }
 
@@ -55,7 +55,7 @@ app.use(koaBody({
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
-  console.log(ctx)
+  // console.log(ctx)
   await next()
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)

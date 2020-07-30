@@ -5,11 +5,11 @@ const path = require("path");
 const config = require("../config/default.js");
 
 if (process.env.NODE_ENV == "development") {
-	baseUrl = config.musicPathDev;
+	baseUrl = config.apiPathDev;
 } else if (process.env.NODE_ENV == "production") {
-	baseUrl = config.musicPathPro;
+	baseUrl = config.apiPathPro;
 } else {
-	baseUrl = config.musicPathDev;
+	baseUrl = config.apiPathDev;
 }
 
 //实例化路由， 拼接到api路径下，restful规范
@@ -36,7 +36,7 @@ router.post("/uploadFilds", async (ctx, next) => {
 	let uploading = function (file) {
 		// 创建可读流
 		const reader = fs.createReadStream(file.path);
-
+		const musicType = ["mp3", "wav", "wma", "rm", "midi", "ape", "flac"];
 		let targetPath =
 			path.join(__dirname, "../uploads/", `/${file.name.split(".")[1]}/`) +
 			`/${file.name}`;
@@ -45,7 +45,6 @@ router.post("/uploadFilds", async (ctx, next) => {
 		// 可读流通过管道写入可写流
 		reader.pipe(upStream);
 		let msg = file.name.split(".");
-		let musicType = ["mp3", "wav", "wma", "rm", "midi", "ape", "flac"];
 		let values = {
 			type: msg.pop(),
 			name: msg.join(""),
