@@ -14,7 +14,7 @@ const config = {
 
 
   apiPathDev: "http://127.0.0.1:3000", //音乐文件存放路径
-  apiPathPro: "http://music.i07.xyz"
+  apiPathPro: "http://i07.xyz"
 }
 
 module.exports = config

@@ -89,8 +89,7 @@ class Mysql {
 
 	getUser() {
 		return query(
-			"GET",
-			{
+			"GET", {
 				tableName: "user",
 			},
 			function () {}
@@ -98,9 +97,17 @@ class Mysql {
 	}
 	getMusicList() {
 		return query(
-			"GET",
-			{
+			"GET", {
 				tableName: "music",
+			},
+			function () {}
+		);
+	}
+	async getNoteList() {
+		return query(
+			"GET", {
+				select: "id, note_detail, create_date",
+				tableName: "notes",
 			},
 			function () {}
 		);
@@ -114,9 +121,9 @@ class Mysql {
 		let date = new Date();
 		let Y = date.getFullYear() + "-";
 		let M =
-			(date.getMonth() + 1 < 10
-				? "0" + (date.getMonth() + 1)
-				: date.getMonth() + 1) + "-";
+			(date.getMonth() + 1 < 10 ?
+				"0" + (date.getMonth() + 1) :
+				date.getMonth() + 1) + "-";
 		let D = date.getDate();
 
 		idResort("music");
@@ -132,19 +139,17 @@ class Mysql {
 	 * @param {Object} values 保存到mysql的数据
 	 */
 	insertNote(values) {
-		let date = new Date();
-		let Y = date.getFullYear() + "-";
-		let M =
-			(date.getMonth() + 1 < 10
-				? "0" + (date.getMonth() + 1)
-				: date.getMonth() + 1) + "-";
-		let D = date.getDate();
 
+		let tableName = values.username === "shin" ? "notes" : "other_notes";
 		return insert(
-			"notes",
-			["detail", "create_date", "create_full_date"],
-			[values.detail, Y + M + D, date]
+			tableName,
+			["note_detail", "username", "create_date", "create_time"],
+			[values.detail, values.username, values.createDate, values.createFullDate]
 		);
+
+
+
+
 	}
 
 	/**
@@ -155,9 +160,9 @@ class Mysql {
 		let date = new Date();
 		let Y = date.getFullYear() + "-";
 		let M =
-			(date.getMonth() + 1 < 10
-				? "0" + (date.getMonth() + 1)
-				: date.getMonth() + 1) + "-";
+			(date.getMonth() + 1 < 10 ?
+				"0" + (date.getMonth() + 1) :
+				date.getMonth() + 1) + "-";
 		let D = date.getDate();
 
 		await createTable(values.type, "file_module");

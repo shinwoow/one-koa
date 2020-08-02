@@ -3,9 +3,9 @@ const convert = require('koa-convert')//提供koa3.0 middleware支持
 
 module.exports = convert(cors({
   origin: function (ctx) {
-    if (ctx.url === '/api') {
-      return "*"; // 允许来自所有域名请求
-    }
+    // if (ctx.url === '/api') {
+    //   return "*"; // 允许来自所有域名请求
+    // }
     // return 'http://127.0.0.1:7777';
     return "*";
   },
