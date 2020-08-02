@@ -13,7 +13,7 @@ const config = {
   },
 
 
-  apiPathDev: "http://127.0.0.1:3000", //音乐文件存放路径
+  apiPathDev: "http://127.0.0.1:3333", //音乐文件存放路径
   apiPathPro: "http://i07.xyz"
 }
 
