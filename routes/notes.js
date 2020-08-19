@@ -26,6 +26,14 @@ router.get('/getNoteList', async (ctx, next) => {
 		data: data,
 	});
 })
+router.get('/getOtherNoteList', async (ctx, next) => {
+	let data = await mysql.getOtherNoteList();
+
+	return (ctx.body = {
+		code: "200",
+		data: data,
+	});
+})
 
 router.post("/uploadNote", async (ctx, next) => {
 	console.log(ctx.request.body.param);

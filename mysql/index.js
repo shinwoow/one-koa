@@ -113,6 +113,16 @@ class Mysql {
 		);
 	}
 
+	async getNoteList() {
+		return query(
+			"GET", {
+				select: "id, note_detail, create_date",
+				tableName: "other_notes",
+			},
+			function () {}
+		);
+	}
+
 	/**
 	 * 将music上传的文件信息保存到mysql
 	 * @param {Object} values 保存到mysql的数据
